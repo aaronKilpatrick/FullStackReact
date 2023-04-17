@@ -10,7 +10,43 @@ const Button = ({handleClick, text}) => {
   )
 }
 
-const Total = ({text, total}) => <p>{text}: {total}</p>
+const StatisticLine = ({text, total}) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{total}</td>
+    </tr>
+  )
+}
+
+
+const Statistics = ({good, neutral, bad}) => {
+  const total = good + neutral + bad
+
+  if (total === 0) {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>No Feedback Given</td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+
+  return (
+    <table>
+      <tbody>
+        <StatisticLine text="Good" total={good} />
+        <StatisticLine text="Neutral" total={neutral} />
+        <StatisticLine text="Bad" total={bad} />
+        <StatisticLine text="Average" total={(good - bad) / total} />
+        <StatisticLine text="Positive" total={( good / total ) * 100} />
+      </tbody>
+    </table>
+  )
+}
 
 const App = () => {
   const [good, setGood]       = useState(0)
@@ -31,12 +67,7 @@ const App = () => {
       </div>
 
       <Heading heading="Statistics" />
-
-      <div>
-        <Total text="Good" total={good} />
-        <Total text="Neutral" total={neutral} />
-        <Total text="Bad" total={bad} />
-      </div>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
     
   )
