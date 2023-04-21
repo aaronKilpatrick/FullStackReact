@@ -55,7 +55,6 @@ const App = () => {
       />
       <Button handleClick={handleVote} text="Vote" />
       <Button handleClick={handleSelected} text="Next Anecdote" />
-      
       <AnecdoteDisplay
         heading="Anecdote with Most Votes"
         anecdote={anecdotes[indexMostPoints]}
